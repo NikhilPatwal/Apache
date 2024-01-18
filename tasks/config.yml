@@ -1,0 +1,17 @@
+---
+- name: setting up the apache web server
+  template:
+    src: templates/index.j2
+    dest: /var/www/html/index.html
+
+- name: setting the firewalld
+  firewalld:
+    service: http
+    immediate: yes
+    permanent: yes
+    state: enabled
+
+- name: reload the firewall service
+  service:
+    name: firewalld
+    state: reloaded
